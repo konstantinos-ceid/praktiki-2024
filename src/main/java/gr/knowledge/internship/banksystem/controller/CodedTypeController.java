@@ -36,8 +36,8 @@ public class CodedTypeController {
     }
 
     @DeleteMapping
-    public String deleteCodedType(@RequestBody CodedTypeDto codedTypeDto) {
-        return codedTypeService.deleteCodedType(codedTypeDto);
+    public void deleteCodedType(@RequestBody CodedTypeDto codedTypeDto) {
+        codedTypeService.deleteCodedType(codedTypeDto);
     }
 
 }

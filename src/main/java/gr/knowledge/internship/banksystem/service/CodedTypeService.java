@@ -51,34 +51,40 @@ public class CodedTypeService {
         return codedTypeDto;
     }
     /**
-     * Updates an existing CodedType in the repository, if exists, else throws exception.
+     * Updates an existing CodedType in the repository, if exists.
      * @param codedTypeDto the CodedTypeDto to update.
      * @param id the ID of the CodedType to update.
      * @return the updated CodedTypeDto.
      */
     public CodedTypeDto updateCodedType(CodedTypeDto codedTypeDto, Long id) {
-        if(codedTypeRepository.findById(id).isPresent() && codedTypeDto.getId().equals(id)){
-            codedTypeRepository.save(codedTypeMapper.toEntity(codedTypeDto));
+        checkExistingCodedType(codedTypeDto, id);
+        codedTypeRepository.save(codedTypeMapper.toEntity(codedTypeDto));
+        return codedTypeDto;
+    }
+    /**
+     * Checks if a CodedType with the given ID exists in the repository.
+     * If the CodedType does not exist, it throws an IllegalArgumentException.
+     * If the ID in the CodedTypeDto does not match the provided ID, it also throws an IllegalArgumentException.
+     * @param codedTypeDto the CodedTypeDto containing the ID to check.
+     * @param id the ID to compare with the ID in the CodedTypeDto.
+     * @throws IllegalArgumentException if there is no CodedType with the given ID or if the IDs do not match.
+     */
+    private void checkExistingCodedType(CodedTypeDto codedTypeDto, Long id) {
+        if (codedTypeRepository.findById(codedTypeDto.getId()).isEmpty()){
+            throw new IllegalArgumentException("There is no CodedType with ID: "+codedTypeDto.getId());
         }
         else if (!codedTypeDto.getId().equals(id)){
-            throw new IllegalArgumentException("Id in Path doesn't match body");
-        } else if (codedTypeRepository.findById(id).isEmpty()){
-            throw new IllegalArgumentException("There is no CodedType with ID: " + id);
+            throw new IllegalArgumentException("ID in Path doesn't match body");
         }
-        return codedTypeDto;
     }
     /**
      * Deletes a CodedType from the repository if exists, else throw exception.
      * @param codedTypeDto the CodedTypeDto to delete.
-     * @return a string indicating the success of the operation.
      */
-    public String deleteCodedType(CodedTypeDto codedTypeDto) {
+    public void deleteCodedType(CodedTypeDto codedTypeDto) {
         if (codedTypeRepository.findById(codedTypeDto.getId()).isEmpty()){
             throw new IllegalArgumentException("There is no CodedType with ID: "+codedTypeDto.getId()+" to delete");
         }
-        else {
-            codedTypeRepository.delete(codedTypeMapper.toEntity(codedTypeDto));
-            return "Success";
-        }
+        codedTypeRepository.delete(codedTypeMapper.toEntity(codedTypeDto));
     }
 }
