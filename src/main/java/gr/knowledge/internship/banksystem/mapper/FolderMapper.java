@@ -1,4 +1,4 @@
-package mapper;
+package gr.knowledge.internship.banksystem.mapper;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +13,7 @@ import gr.knowledge.internship.banksystem.entity.Folder;
 @Component
 public class FolderMapper {
 	@Autowired
-	ModelMapper modelMapper;
+	private ModelMapper modelMapper;
 
 	public Folder toFolder(FolderDTO folderDTO) {
 		return modelMapper.map(folderDTO, Folder.class);

@@ -1,4 +1,4 @@
-package mapper;
+package gr.knowledge.internship.banksystem.mapper;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +13,7 @@ import gr.knowledge.internship.banksystem.entity.Document;
 @Component
 public class DocumentMapper {
 	@Autowired
-	ModelMapper modelMapper;
+	private ModelMapper modelMapper;
 
 	public Document toDocument(DocumentDTO documentDTO) {
 		return modelMapper.map(documentDTO, Document.class);
