@@ -1,17 +1,17 @@
 package gr.knowledge.internship.banksystem.service;
-
 import gr.knowledge.internship.banksystem.dto.PhoneDTO;
-import gr.knowledge.internship.banksystem.entity.Phone;
+import gr.knowledge.internship.banksystem.mapper.PhoneMapper;
 import gr.knowledge.internship.banksystem.repository.PhoneRepository;
-import jakarta.transaction.Transactional;
+import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Service class for managing phones.
+ */
 @Service
 @Transactional
 public class PhoneService {
@@ -23,38 +23,59 @@ public class PhoneService {
     private ModelMapper modelMapper;
 
 
+    @Autowired
+    private PhoneMapper phoneMapper;
+
+    /**
+     * Retrieves all phones.
+     *
+     * @return a list of all phones
+     */
+    @Transactional(readOnly=true)
     public List<PhoneDTO> getPhones(){
-        List<Phone> allPhones=phoneRepository.findAll();
-
-        List<PhoneDTO> allPhonesDTO= modelMapper.map(allPhones,new TypeToken<List<PhoneDTO>>(){}.getType());
-
-        return allPhonesDTO;
+        return phoneMapper.toDTO(phoneRepository.findAll());
     }
 
+    /**
+     * Saves a new phone.
+     *
+     * @param phoneDTO the phone DTO to be saved
+     * @return the saved phone DTO
+     */
     public PhoneDTO savePhone(PhoneDTO phoneDTO){
-        Phone savedPhone =phoneRepository.save(modelMapper.map(phoneDTO, Phone.class));
-        return phoneDTO;
+        return phoneMapper.toDTO(phoneRepository.save(phoneMapper.toEntity(phoneDTO)));
     }
-
+    /**
+     * Updates an existing phone.
+     *
+     * @param phoneDTO the phone DTO to be updated
+     * @return the updated phone DTO
+     */
     public PhoneDTO updatePhone(PhoneDTO phoneDTO){
-        Phone updatedPhone =phoneRepository.save(modelMapper.map(phoneDTO,Phone.class));
-        return phoneDTO;
+        return phoneMapper.toDTO(phoneRepository.save(phoneMapper.toEntity(phoneDTO)));
     }
 
+    /**
+     * Deletes a phone.
+     *
+     * @param phoneDTO the phone DTO to be deleted
+     * @return {@code true} if the phone is deleted successfully, {@code false} otherwise
+     */
     public boolean deletePhone(PhoneDTO phoneDTO) {
-        phoneRepository.delete(modelMapper.map(phoneDTO, Phone.class));
+        phoneRepository.delete(phoneMapper.toEntity(phoneDTO));
         return true;
     }
-
+    /**
+     * Retrieves a phone by its ID.
+     *
+     * @param id the ID of the phone to retrieve
+     * @return the phone DTO if found
+     * @throws EntityNotFoundException if no phone with the given ID is found
+     */
+    @Transactional(readOnly=true)
     public PhoneDTO getPhoneById(Long id){
-        Optional<Phone> bankOptional = phoneRepository.findById(id);
-
-        PhoneDTO phoneDTO = modelMapper.map(bankOptional.get(), PhoneDTO.class);
-        return phoneDTO;
+        return phoneRepository.findById(id)
+                .map(phoneMapper::toDTO)
+                .orElseThrow(() -> new EntityNotFoundException("There is no Bank with ID: " + id));
     }
-
-
-
-
-
 }

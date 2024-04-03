@@ -30,7 +30,7 @@ public class PhoneController {
     public boolean deletePhone(@RequestBody PhoneDTO phoneDTO) {
         return phoneService.deletePhone(phoneDTO);
     }
-    @GetMapping("/phone/{id}")
+    @GetMapping("/{id}")
     public PhoneDTO showPhone(@PathVariable Long id) {
         return phoneService.getPhoneById(id);
     }

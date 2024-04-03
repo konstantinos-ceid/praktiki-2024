@@ -23,7 +23,7 @@ public class BankController {
     public  BankDTO saveBonus(@RequestBody  BankDTO bankDTO){
         return bankService.saveBank(bankDTO);
     }
-    @PutMapping
+    @PutMapping//update
     public BankDTO updateBank(@RequestBody BankDTO bankDTO) {
         return bankService.updateBank(bankDTO);
     }
@@ -33,7 +33,7 @@ public class BankController {
 
         return bankService.deleteBank(bankDTO);
     }
-    @GetMapping("/bank/{id}")
+    @GetMapping("/{id}")
     public BankDTO showBank(@PathVariable Long id) {
         return bankService.getBankById(id);
 

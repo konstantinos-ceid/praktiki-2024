@@ -6,16 +6,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class PhoneDTO {
-    private long id;
+public class PhoneDTO implements Serializable {
+    private Long id;
 
-    private Integer phone_type;
+    private Integer phoneType;
 
-    private String phone_number;
+    private String phoneNumber;
 
-    private String registry_afm;
+    private String registryAfm;
 }
