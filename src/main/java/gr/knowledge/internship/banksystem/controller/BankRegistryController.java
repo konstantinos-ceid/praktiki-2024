@@ -21,9 +21,9 @@ public class BankRegistryController {
     public BankRegistryDTO saveBankRegistry(@RequestBody BankRegistryDTO bankRegistryDTO){
         return bankRegistryService.saveBankRegistry(bankRegistryDTO);
     }
-    @PutMapping()
-    public BankRegistryDTO updateBankRegistry(@RequestBody BankRegistryDTO bankRegistryDTO){
-        return bankRegistryService.updateBankRegistry(bankRegistryDTO);
+    @PutMapping("/{id}")
+    public BankRegistryDTO updateBankRegistry(@PathVariable Long id, @RequestBody BankRegistryDTO bankRegistryDTO) {
+        return bankRegistryService.updateBankRegistry(id, bankRegistryDTO);
     }
     @DeleteMapping
     public void deleteAllBankRegistries() {

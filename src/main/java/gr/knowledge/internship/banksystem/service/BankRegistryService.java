@@ -26,19 +26,46 @@ public class BankRegistryService {
         this.modelMapper = modelMapper;
     }
 
+    /**
+     * Retrieves all bank registries.
+     *
+     * @return List of BankRegistryDTO containing all bank registries.
+     */
     public List<BankRegistryDTO> getAllBankRegistries(){
         List<BankRegistry> companyList = bankRegistryRepository.findAll();
         return modelMapper.map(companyList, new TypeToken<List<BankRegistryDTO>>(){}.getType());
     }
 
-    public BankRegistryDTO updateBankRegistry(BankRegistryDTO companyDTO){
-        bankRegistryRepository.save(modelMapper.map(companyDTO,BankRegistry.class));
-        return companyDTO;
+    /**
+     * Updates a bank registry.
+     *
+     * @param id              The ID of the bank registry to be updated.
+     * @param bankRegistryDTO The updated bank registry data.
+     * @return BankRegistryDTO representing the updated bank registry.
+     * @throws RuntimeException if the bank registry with the given ID is not found.
+     */
+    public BankRegistryDTO updateBankRegistry(Long id, BankRegistryDTO bankRegistryDTO) {
+        BankRegistry existingBankRegistry = bankRegistryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Bank Registry not found with id: " + id));
+        existingBankRegistry.setName(bankRegistryDTO.getName());
+        bankRegistryRepository.save(existingBankRegistry);
+        return bankRegistryDTO;
     }
+
+    /**
+     * Saves a new bank registry.
+     *
+     * @param bankRegistryDTO The bank registry data to be saved.
+     * @return BankRegistryDTO representing the saved bank registry.
+     */
     public BankRegistryDTO saveBankRegistry(BankRegistryDTO bankRegistryDTO) {
         bankRegistryRepository.save(modelMapper.map(bankRegistryDTO, BankRegistry.class));
         return bankRegistryDTO;
     }
+
+    /**
+     * Deletes all bank registries.
+     */
     public void deleteAllBankRegistries() {
         bankRegistryRepository.deleteAll();
     }
