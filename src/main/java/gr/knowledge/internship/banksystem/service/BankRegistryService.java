@@ -31,25 +31,40 @@ public class BankRegistryService {
         return bankRegistryMapper.convertListToDto(companyList, BankRegistryDTO.class);
     }
 
-
     /**
-     * Updates a bank registry.
+     * Updates the details of a bank registry.
      *
      * @param id              The ID of the bank registry to be updated.
      * @param bankRegistryDTO The updated bank registry data.
-     * @return BankRegistryDTO representing the updated bank registry.
-     * @throws RuntimeException if the bank registry with the given ID is not found.
+     * @return The updated bank registry DTO.
+     * @throws IllegalArgumentException If the ID in the path variable does not match the ID in the request body.
+     * @throws RuntimeException         If the bank registry with the given ID is not found.
      */
     public BankRegistryDTO updateBankRegistry(Long id, BankRegistryDTO bankRegistryDTO) {
-        BankRegistry existingBankRegistry = bankRegistryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Bank Registry not found with id: " + id));
-        //check if the ID in the path variable matches the ID in the request body
-        if (!existingBankRegistry.getId().equals(bankRegistryDTO.getId())) {
-            throw new IllegalArgumentException("ID in path variable does not match ID in request body");
-        }
+        BankRegistry existingBankRegistry = findAndValidateIdMatch(id, bankRegistryDTO.getId());
         existingBankRegistry.setName(bankRegistryDTO.getName());
         bankRegistryRepository.save(existingBankRegistry);
         return bankRegistryDTO;
+    }
+
+    /**
+     * Finds a bank registry by ID and validates if the ID in the path variable matches the ID in the request body.
+     *
+     * @param id            The ID of the bank registry to find.
+     * @param requestBodyId The ID present in the request body.
+     * @return The bank registry if found and the IDs match.
+     * @throws IllegalArgumentException If the ID in the path variable does not match the ID in the request body.
+     * @throws RuntimeException         If the bank registry with the given ID is not found.
+     */
+    private BankRegistry findAndValidateIdMatch(Long id, Long requestBodyId) {
+        BankRegistry existingBankRegistry = bankRegistryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Bank Registry not found with id: " + id));
+        //check if the ID in the path variable matches the ID in the request body
+        if (!existingBankRegistry.getId().equals(requestBodyId)) {
+            throw new IllegalArgumentException("ID in path variable does not match ID in request body");
+        }
+
+        return existingBankRegistry;
     }
 
     /**
