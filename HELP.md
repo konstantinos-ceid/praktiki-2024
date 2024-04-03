@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'gr.knowledge.internship.bank-system' is invalid and this project uses 'gr.knowledge.internship.banksystem' instead.
+* The original package name 'gr.knowledge.internship.   bank-system' is invalid and this project uses 'gr.knowledge.internship.banksystem' instead.
 
 # Getting Started
 
