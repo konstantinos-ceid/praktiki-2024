@@ -47,6 +47,10 @@ public class BankRegistryService {
     public BankRegistryDTO updateBankRegistry(Long id, BankRegistryDTO bankRegistryDTO) {
         BankRegistry existingBankRegistry = bankRegistryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Bank Registry not found with id: " + id));
+        //check if the ID in the path variable matches the ID in the request body
+        if (!existingBankRegistry.getId().equals(bankRegistryDTO.getId())) {
+            throw new IllegalArgumentException("ID in path variable does not match ID in request body");
+        }
         existingBankRegistry.setName(bankRegistryDTO.getName());
         bankRegistryRepository.save(existingBankRegistry);
         return bankRegistryDTO;
