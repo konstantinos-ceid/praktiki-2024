@@ -2,10 +2,9 @@ package gr.knowledge.internship.banksystem.service;
 
 import gr.knowledge.internship.banksystem.dto.BankRegistryDTO;
 import gr.knowledge.internship.banksystem.entity.BankRegistry;
+import gr.knowledge.internship.banksystem.mapper.BankRegistryMapper;
 import gr.knowledge.internship.banksystem.repository.BankRegistryRepository;
 import lombok.extern.log4j.Log4j2;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,14 +16,10 @@ import java.util.List;
 @Log4j2
 public class BankRegistryService {
 
-    private final BankRegistryRepository bankRegistryRepository;
-    private final ModelMapper modelMapper;
-
     @Autowired
-    public BankRegistryService(BankRegistryRepository bankRegistryRepository, ModelMapper modelMapper) {
-        this.bankRegistryRepository = bankRegistryRepository;
-        this.modelMapper = modelMapper;
-    }
+    private BankRegistryRepository bankRegistryRepository;
+    @Autowired
+    private BankRegistryMapper bankRegistryMapper;
 
     /**
      * Retrieves all bank registries.
@@ -33,8 +28,9 @@ public class BankRegistryService {
      */
     public List<BankRegistryDTO> getAllBankRegistries(){
         List<BankRegistry> companyList = bankRegistryRepository.findAll();
-        return modelMapper.map(companyList, new TypeToken<List<BankRegistryDTO>>(){}.getType());
+        return bankRegistryMapper.convertListToDto(companyList, BankRegistryDTO.class);
     }
+
 
     /**
      * Updates a bank registry.
@@ -63,8 +59,9 @@ public class BankRegistryService {
      * @return BankRegistryDTO representing the saved bank registry.
      */
     public BankRegistryDTO saveBankRegistry(BankRegistryDTO bankRegistryDTO) {
-        bankRegistryRepository.save(modelMapper.map(bankRegistryDTO, BankRegistry.class));
-        return bankRegistryDTO;
+        BankRegistry bankRegistry = bankRegistryMapper.convertToEntity(bankRegistryDTO, BankRegistry.class);
+        bankRegistryRepository.save(bankRegistry);
+        return bankRegistryMapper.convertToDto(bankRegistry, BankRegistryDTO.class);
     }
 
     /**
