@@ -13,10 +13,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Component
 public class CodedTypeMapper {
 
@@ -24,15 +20,11 @@ public class CodedTypeMapper {
     private ModelMapper modelMapper;
 
     public CodedTypeDto toDto(CodedType codedType) {
-        CodedTypeDto codedTypeDto = new CodedTypeDto();
-        modelMapper.map(codedType, codedTypeDto);
-        return codedTypeDto;
+        return modelMapper.map(codedType, CodedTypeDto.class);
     }
 
     public CodedType toEntity(CodedTypeDto codedTypeDto) {
-        CodedType codedType = new CodedType();
-        modelMapper.map(codedTypeDto, codedType);
-        return codedType;
+        return modelMapper.map(codedTypeDto, CodedType.class);
     }
 
     public List<CodedType> toEntityList(List<CodedTypeDto> codedTypeDtoList) {
