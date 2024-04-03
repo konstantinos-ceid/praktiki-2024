@@ -17,10 +17,14 @@ import java.util.List;
 @Log4j2
 public class BankRegistryService {
 
+    private final BankRegistryRepository bankRegistryRepository;
+    private final ModelMapper modelMapper;
+
     @Autowired
-    private BankRegistryRepository bankRegistryRepository;
-    @Autowired
-    private ModelMapper modelMapper;
+    public BankRegistryService(BankRegistryRepository bankRegistryRepository, ModelMapper modelMapper) {
+        this.bankRegistryRepository = bankRegistryRepository;
+        this.modelMapper = modelMapper;
+    }
 
     public List<BankRegistryDTO> getAllBankRegistries(){
         List<BankRegistry> companyList = bankRegistryRepository.findAll();

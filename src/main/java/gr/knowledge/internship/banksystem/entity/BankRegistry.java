@@ -1,6 +1,7 @@
 package gr.knowledge.internship.banksystem.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -16,11 +17,8 @@ import java.util.Date;
 public class BankRegistry {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bank_registry_sequence")
-    @SequenceGenerator(
-            name = "bank_registry_sequence",
-            sequenceName = "bank_registry_sequence",
-            allocationSize = 50
-    )
+    @SequenceGenerator(name = "bank_registry_sequence", sequenceName = "bank_registry_sequence", allocationSize = 50)
+    @NotNull
     private Long id;
 
     @Column(
