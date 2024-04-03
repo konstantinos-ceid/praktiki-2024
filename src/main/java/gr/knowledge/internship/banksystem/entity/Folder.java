@@ -1,5 +1,7 @@
 package gr.knowledge.internship.banksystem.entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,13 +15,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "folder")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Folder {
+public class Folder implements Serializable {
 	@Id
 	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "folder_id_seq")
