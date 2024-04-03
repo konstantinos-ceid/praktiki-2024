@@ -30,9 +30,9 @@ public class CodedTypeController {
         return codedTypeService.saveCodedType(codedTypeDto);
     }
 
-    @PutMapping
-    public CodedTypeDto updateCodedType(@RequestBody CodedTypeDto codedTypeDto) {
-        return codedTypeService.saveCodedType(codedTypeDto);
+    @PutMapping("/{id}")
+    public CodedTypeDto updateCodedType(@RequestBody CodedTypeDto codedTypeDto, @PathVariable Long id) {
+        return codedTypeService.updateCodedType(codedTypeDto, id);
     }
 
     @DeleteMapping

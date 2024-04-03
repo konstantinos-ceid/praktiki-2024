@@ -10,23 +10,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 
 @Entity
 @Table(name = "coded_type")
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor
-public class CodedType {
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class CodedType implements Serializable {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "coded_type_sequence")
-    @SequenceGenerator(
-            name = "coded_type_sequence",
-            sequenceName = "coded_type_sequence",
-            allocationSize = 50,
-            initialValue = 1
-    )
+    @SequenceGenerator(name = "coded_type_sequence", sequenceName = "coded_type_sequence", allocationSize = 50, initialValue = 1)
     private Long id;
 
-    @Column(name = "code") @Size(max = 255)
+    @Column(name = "code")
+    @Size(max = 255)
     private String code;
 
     @Column(name = "description")
