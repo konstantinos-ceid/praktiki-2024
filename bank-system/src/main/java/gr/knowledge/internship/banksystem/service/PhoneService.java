@@ -19,8 +19,6 @@ public class PhoneService {
     @Autowired
     private PhoneRepository phoneRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
 
 
     @Autowired
@@ -33,7 +31,7 @@ public class PhoneService {
      */
     @Transactional(readOnly=true)
     public List<PhoneDTO> getPhones(){
-        return phoneMapper.toDTO(phoneRepository.findAll());
+        return phoneMapper.toDTOList(phoneRepository.findAll());
     }
 
     /**
@@ -61,9 +59,9 @@ public class PhoneService {
      * @param phoneDTO the phone DTO to be deleted
      * @return {@code true} if the phone is deleted successfully, {@code false} otherwise
      */
-    public boolean deletePhone(PhoneDTO phoneDTO) {
+    public void deletePhone(PhoneDTO phoneDTO) {
         phoneRepository.delete(phoneMapper.toEntity(phoneDTO));
-        return true;
+
     }
     /**
      * Retrieves a phone by its ID.

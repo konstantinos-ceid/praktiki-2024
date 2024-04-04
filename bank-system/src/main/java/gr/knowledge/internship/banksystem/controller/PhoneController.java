@@ -27,9 +27,7 @@ public class PhoneController {
         return phoneService.updatePhone(phoneDTO);
     }
     @DeleteMapping
-    public boolean deletePhone(@RequestBody PhoneDTO phoneDTO) {
-        return phoneService.deletePhone(phoneDTO);
-    }
+    public void deletePhone(@RequestBody PhoneDTO phoneDTO) {phoneService.deletePhone(phoneDTO);}
     @GetMapping("/{id}")
     public PhoneDTO showPhone(@PathVariable Long id) {
         return phoneService.getPhoneById(id);

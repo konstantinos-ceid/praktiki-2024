@@ -1,6 +1,7 @@
 package gr.knowledge.internship.banksystem.dto;
 
 
+import gr.knowledge.internship.banksystem.entity.CodedType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.io.Serializable;
 public class PhoneDTO implements Serializable {
     private Long id;
 
-    private Integer phoneType;
+    private CodedTypeDto phoneType;
 
     private String phoneNumber;
 
