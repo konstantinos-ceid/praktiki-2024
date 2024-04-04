@@ -1,7 +1,7 @@
 package gr.knowledge.internship.banksystem.service;
 
 import gr.knowledge.internship.banksystem.mapper.CodedTypeMapper;
-import gr.knowledge.internship.banksystem.Dto.CodedTypeDto;
+import gr.knowledge.internship.banksystem.dto.CodedTypeDto;
 import gr.knowledge.internship.banksystem.entity.CodedType;
 import gr.knowledge.internship.banksystem.repository.CodedTypeRepository;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
 package gr.knowledge.internship.banksystem.controller;
 
-import gr.knowledge.internship.banksystem.Dto.CodedTypeDto;
+import gr.knowledge.internship.banksystem.dto.CodedTypeDto;
 import gr.knowledge.internship.banksystem.service.CodedTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

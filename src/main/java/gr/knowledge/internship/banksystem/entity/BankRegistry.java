@@ -67,6 +67,7 @@ public class BankRegistry implements Serializable {
     @Column(name = "bank_id", nullable = false)
     private Integer bankId;
 
-    @Column(name = "sector_id", nullable = false)
-    private Integer sectorId;
+    @OneToOne
+    @JoinColumn(name = "sector_id")
+    private CodedType codedType;
 }

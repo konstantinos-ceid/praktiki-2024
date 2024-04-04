@@ -1,11 +1,7 @@
 package gr.knowledge.internship.banksystem.mapper;
 
-import gr.knowledge.internship.banksystem.Dto.CodedTypeDto;
+import gr.knowledge.internship.banksystem.dto.CodedTypeDto;
 import gr.knowledge.internship.banksystem.entity.CodedType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
