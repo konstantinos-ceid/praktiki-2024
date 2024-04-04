@@ -2,6 +2,7 @@ package gr.knowledge.internship.banksystem.service;
 
 import gr.knowledge.internship.banksystem.dto.BankRegistryDTO;
 import gr.knowledge.internship.banksystem.entity.BankRegistry;
+import gr.knowledge.internship.banksystem.mapper.BankRegistryMapper;
 import gr.knowledge.internship.banksystem.repository.BankRegistryRepository;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -20,11 +21,11 @@ public class BankRegistryService {
     @Autowired
     private BankRegistryRepository bankRegistryRepository;
     @Autowired
-    private ModelMapper modelMapper;
+    private BankRegistryMapper bankRegistryMapper;
 
     public List<BankRegistryDTO> getAllBankRegistries(){
         List<BankRegistry> companyList = bankRegistryRepository.findAll();
-        return modelMapper.map(companyList, new TypeToken<List<BankRegistryDTO>>(){}.getType());
+        return bankRegistryMapper.toDtoList(companyList);
     }
 
     /**
@@ -37,9 +38,8 @@ public class BankRegistryService {
      * @throws RuntimeException         If the bank registry with the given ID is not found.
      */
     public BankRegistryDTO updateBankRegistry(Long id, BankRegistryDTO bankRegistryDTO) {
-        BankRegistry existingBankRegistry = findAndValidateIdMatch(id, bankRegistryDTO.getId());
-        existingBankRegistry.setName(bankRegistryDTO.getName());
-        bankRegistryRepository.save(existingBankRegistry);
+        BankRegistry bankRegistry = findAndValidateIdMatch(id, bankRegistryDTO.getId());
+        bankRegistryRepository.save(bankRegistry);
         return bankRegistryDTO;
     }
 
@@ -61,8 +61,9 @@ public class BankRegistryService {
         return existingBankRegistry;
     }
     public BankRegistryDTO saveBankRegistry(BankRegistryDTO bankRegistryDTO) {
-        bankRegistryRepository.save(modelMapper.map(bankRegistryDTO, BankRegistry.class));
-        return bankRegistryDTO;
+        BankRegistry bankRegistry = bankRegistryMapper.toEntity(bankRegistryDTO);
+        bankRegistryRepository.save(bankRegistry);
+        return bankRegistryMapper.toDto(bankRegistry);
     }
     public void deleteBankRegistryById(Long id) {
         bankRegistryRepository.deleteById(id);

@@ -1,5 +1,9 @@
 package gr.knowledge.internship.banksystem.mapper;
 
+import gr.knowledge.internship.banksystem.dto.BankRegistryDTO;
+import gr.knowledge.internship.banksystem.dto.CodedTypeDto;
+import gr.knowledge.internship.banksystem.entity.BankRegistry;
+import gr.knowledge.internship.banksystem.entity.CodedType;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,30 +14,22 @@ import java.util.stream.Collectors;
 @Component
 public class BankRegistryMapper {
 
-    private final ModelMapper modelMapper;
-
     @Autowired
-    public BankRegistryMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    private ModelMapper modelMapper;
+
+    public BankRegistryDTO toDto(BankRegistry bankRegistry) {
+        return modelMapper.map(bankRegistry, BankRegistryDTO.class);
     }
 
-    public <D, E> D convertToDto(E entity, Class<D> dtoClass) {
-        return modelMapper.map(entity, dtoClass);
+    public BankRegistry toEntity(BankRegistryDTO bankRegistryDTO) {
+        return modelMapper.map(bankRegistryDTO, BankRegistry.class);
     }
 
-    public <E, D> E convertToEntity(D dto, Class<E> entityClass) {
-        return modelMapper.map(dto, entityClass);
+    public List<BankRegistry> toEntityList(List<BankRegistryDTO> bankRegistryDTOList) {
+        return bankRegistryDTOList.stream().map(this::toEntity).collect(Collectors.toList());
     }
 
-    public <D, E> List<D> convertListToDto(List<E> entityList, Class<D> dtoClass) {
-        return entityList.stream()
-                .map(entity -> convertToDto(entity, dtoClass))
-                .collect(Collectors.toList());
-    }
-
-    public <E, D> List<E> convertListToEntity(List<D> dtoList, Class<E> entityClass) {
-        return dtoList.stream()
-                .map(dto -> convertToEntity(dto, entityClass))
-                .collect(Collectors.toList());
+    public List<BankRegistryDTO> toDtoList(List<BankRegistry> bankRegistryList) {
+        return bankRegistryList.stream().map(this::toDto).collect(Collectors.toList());
     }
 }
