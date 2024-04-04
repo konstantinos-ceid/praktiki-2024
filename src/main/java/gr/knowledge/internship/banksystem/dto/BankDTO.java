@@ -7,14 +7,12 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class BankDTO implements Serializable {
     private Long id;
-
     private String name;
-
     private String address;
 }

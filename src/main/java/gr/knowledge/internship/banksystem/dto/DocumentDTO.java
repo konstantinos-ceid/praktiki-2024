@@ -7,13 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class CodedTypeDTO implements Serializable {
-    private Long id;
-    private String code;
-    private String description;
-    private CodedTypeDTO codedType;
+public class DocumentDTO implements Serializable {
+	private Long id;
+	private String name;
+	private String size;
+	private String description;
+	private String uuid;
+	private FolderDTO folder;
 }

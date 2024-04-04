@@ -1,18 +1,14 @@
 package gr.knowledge.internship.banksystem.service;
 
 import gr.knowledge.internship.banksystem.dto.BankDTO;
-import gr.knowledge.internship.banksystem.entity.Bank;
 import gr.knowledge.internship.banksystem.mapper.BankMapper;
 import gr.knowledge.internship.banksystem.repository.BankRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Service class for managing banks.
@@ -27,7 +23,6 @@ public class BankService {
 
     @Autowired
     private BankMapper bankMapper;
-
 
     /**
      * Retrieves all banks.
