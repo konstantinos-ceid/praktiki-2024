@@ -12,7 +12,7 @@
 	<artifactId>bank-system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bank-system</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Demo Project For Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -46,11 +46,13 @@
 			<artifactId>modelmapper</artifactId>
 			<version>3.2.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
 			<version>3.0.2</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
