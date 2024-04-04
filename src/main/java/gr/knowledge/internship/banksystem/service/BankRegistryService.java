@@ -64,7 +64,7 @@ public class BankRegistryService {
         bankRegistryRepository.save(modelMapper.map(bankRegistryDTO, BankRegistry.class));
         return bankRegistryDTO;
     }
-    public void deleteAllBankRegistries() {
-        bankRegistryRepository.deleteAll();
+    public void deleteBankRegistryById(Long id) {
+        bankRegistryRepository.deleteById(id);
     }
 }

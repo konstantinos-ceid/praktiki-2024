@@ -25,8 +25,8 @@ public class BankRegistryController {
     public BankRegistryDTO updateBankRegistry(@PathVariable Long id, @RequestBody BankRegistryDTO bankRegistryDTO) {
         return bankRegistryService.updateBankRegistry(id, bankRegistryDTO);
     }
-    @DeleteMapping
-    public void deleteAllBankRegistries() {
-        bankRegistryService.deleteAllBankRegistries();
+    @DeleteMapping("/{id}")
+    public void deleteBankRegistry(@PathVariable Long id) {
+        bankRegistryService.deleteBankRegistryById(id);
     }
 }
