@@ -81,5 +81,5 @@ public class BankRegistry implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "sector_id")
-    private CodedType codedType;
+    private CodedType sector;
 }
