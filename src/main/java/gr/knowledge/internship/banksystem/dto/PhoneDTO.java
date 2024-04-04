@@ -1,7 +1,5 @@
 package gr.knowledge.internship.banksystem.dto;
 
-
-import gr.knowledge.internship.banksystem.entity.CodedType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,5 +1,6 @@
 package gr.knowledge.internship.banksystem.dto;
 
+import gr.knowledge.internship.banksystem.entity.Bank;
 import lombok.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +22,6 @@ public class BankRegistryDTO implements Serializable {
     private String afm;
     private String amka;
     private String iban;
-    private Integer bankId;
+    private Bank bank;
     private CodedTypeDto codedType;
 }
