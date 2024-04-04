@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class PhoneDTO implements Serializable {
     private Long id;
 
-    private CodedTypeDto phoneType;
+    private CodedTypeDTO phoneType;
 
     private String phoneNumber;
 
