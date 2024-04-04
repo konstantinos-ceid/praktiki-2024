@@ -20,8 +20,7 @@ public class Phone {
     @NotNull
     private Long id;
 // foreign key
-    @NotNull
-    @Column(name="phone_type")
+
     @ManyToOne
     @JoinColumn(name = "phone_type", referencedColumnName = "id")
     private CodedType phoneType;
