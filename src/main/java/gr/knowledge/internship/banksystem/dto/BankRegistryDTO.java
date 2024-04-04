@@ -23,5 +23,5 @@ public class BankRegistryDTO implements Serializable {
     private String amka;
     private String iban;
     private BankDTO bank;
-    private CodedTypeDto sector;
+    private CodedTypeDTO sector;
 }

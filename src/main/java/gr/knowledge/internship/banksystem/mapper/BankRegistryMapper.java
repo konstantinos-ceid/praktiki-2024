@@ -1,7 +1,7 @@
 package gr.knowledge.internship.banksystem.mapper;
 
 import gr.knowledge.internship.banksystem.dto.BankRegistryDTO;
-import gr.knowledge.internship.banksystem.dto.CodedTypeDto;
+import gr.knowledge.internship.banksystem.dto.CodedTypeDTO;
 import gr.knowledge.internship.banksystem.entity.BankRegistry;
 import gr.knowledge.internship.banksystem.entity.CodedType;
 import org.modelmapper.ModelMapper;
