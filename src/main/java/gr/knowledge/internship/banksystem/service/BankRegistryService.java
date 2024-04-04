@@ -53,12 +53,12 @@ public class BankRegistryService {
      * @throws RuntimeException         If the bank registry with the given ID is not found.
      */
     private BankRegistry findAndValidateIdMatch(Long id, Long requestBodyId) {
-        BankRegistry existingBankRegistry = bankRegistryRepository.findById(id)
+        BankRegistry bankRegistry = bankRegistryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Bank Registry not found with id: " + id));
-        if (!existingBankRegistry.getId().equals(requestBodyId)) {
+        if (!bankRegistry.getId().equals(requestBodyId)) {
             throw new IllegalArgumentException("ID in path variable does not match ID in request body");
         }
-        return existingBankRegistry;
+        return bankRegistry;
     }
     public BankRegistryDTO saveBankRegistry(BankRegistryDTO bankRegistryDTO) {
         BankRegistry bankRegistry = bankRegistryMapper.toEntity(bankRegistryDTO);
