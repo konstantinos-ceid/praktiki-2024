@@ -1,7 +1,7 @@
 package gr.knowledge.internship.banksystem.service;
 
 import gr.knowledge.internship.banksystem.mapper.CodedTypeMapper;
-import gr.knowledge.internship.banksystem.dto.CodedTypeDto;
+import gr.knowledge.internship.banksystem.dto.CodedTypeDTO;
 import gr.knowledge.internship.banksystem.entity.CodedType;
 import gr.knowledge.internship.banksystem.repository.CodedTypeRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +27,7 @@ public class CodedTypeService {
      * @return a list of CodedTypeDto objects.
      */
     @Transactional(readOnly = true)
-    public List<CodedTypeDto> getAllCodedTypes() {
+    public List<CodedTypeDTO> getAllCodedTypes() {
         List<CodedType> codedTypeList = codedTypeRepository.findAll();
         return codedTypeMapper.toDtoList(codedTypeList);
     }
@@ -37,7 +37,7 @@ public class CodedTypeService {
      * @return a CodedTypeDto object.
      */
     @Transactional(readOnly = true)
-    public CodedTypeDto getCodedTypeById(Long id) {
+    public CodedTypeDTO getCodedTypeById(Long id) {
         CodedType codedType = codedTypeRepository.findById(id).orElse(null);
         return codedTypeMapper.toDto(codedType);
     }
@@ -46,7 +46,7 @@ public class CodedTypeService {
      * @param codedTypeDto the CodedTypeDto to save.
      * @return the saved CodedTypeDto.
      */
-    public CodedTypeDto saveCodedType(CodedTypeDto codedTypeDto) {
+    public CodedTypeDTO saveCodedType(CodedTypeDTO codedTypeDto) {
         codedTypeRepository.save(codedTypeMapper.toEntity(codedTypeDto));
         return codedTypeDto;
     }
@@ -56,7 +56,7 @@ public class CodedTypeService {
      * @param id the ID of the CodedType to update.
      * @return the updated CodedTypeDto.
      */
-    public CodedTypeDto updateCodedType(CodedTypeDto codedTypeDto, Long id) {
+    public CodedTypeDTO updateCodedType(CodedTypeDTO codedTypeDto, Long id) {
         checkExistingCodedType(codedTypeDto, id);
         codedTypeRepository.save(codedTypeMapper.toEntity(codedTypeDto));
         return codedTypeDto;
@@ -69,7 +69,7 @@ public class CodedTypeService {
      * @param id the ID to compare with the ID in the CodedTypeDto.
      * @throws IllegalArgumentException if there is no CodedType with the given ID or if the IDs do not match.
      */
-    private void checkExistingCodedType(CodedTypeDto codedTypeDto, Long id) {
+    private void checkExistingCodedType(CodedTypeDTO codedTypeDto, Long id) {
         if (codedTypeRepository.findById(codedTypeDto.getId()).isEmpty()){
             throw new IllegalArgumentException("There is no CodedType with ID: "+codedTypeDto.getId());
         }
@@ -81,7 +81,7 @@ public class CodedTypeService {
      * Deletes a CodedType from the repository if exists, else throw exception.
      * @param codedTypeDto the CodedTypeDto to delete.
      */
-    public void deleteCodedType(CodedTypeDto codedTypeDto) {
+    public void deleteCodedType(CodedTypeDTO codedTypeDto) {
         if (codedTypeRepository.findById(codedTypeDto.getId()).isEmpty()){
             throw new IllegalArgumentException("There is no CodedType with ID: "+codedTypeDto.getId()+" to delete");
         }
