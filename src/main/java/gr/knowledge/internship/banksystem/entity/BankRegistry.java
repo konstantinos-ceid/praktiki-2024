@@ -50,10 +50,7 @@ public class BankRegistry {
     @Size(max = 50)
     private String placeOfBirth;
 
-    @Column(
-            name = "afm",
-            nullable = false
-    )
+    @Column(name = "afm", nullable = false)
     @Size(max = 20)
     private String afm;
 
