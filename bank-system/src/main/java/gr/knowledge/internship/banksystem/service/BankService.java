@@ -27,8 +27,7 @@ public class BankService {
 
     @Autowired
     private BankMapper bankMapper;
- @Autowired
-   private ModelMapper modelMapper;
+
 
     /**
      * Retrieves all banks.
@@ -37,7 +36,7 @@ public class BankService {
      */
     @Transactional(readOnly=true)
     public List<BankDTO> getBanks(){
-       return bankMapper.toDTO(bankRepository.findAll());
+       return bankMapper.toDTOList(bankRepository.findAll());
     }
     /**
      * Saves a new bank.
@@ -63,9 +62,9 @@ public class BankService {
      * @param bankDTO the bank DTO to be deleted
      * @return {@code true} if the bank is deleted successfully, {@code false} otherwise
      */
-    public boolean deleteBank(BankDTO bankDTO) {
+    public void deleteBank(BankDTO bankDTO) {
         bankRepository.delete(bankMapper.toEntity(bankDTO));
-        return true;
+
     } /**
      * Retrieves a bank by its ID.
      *

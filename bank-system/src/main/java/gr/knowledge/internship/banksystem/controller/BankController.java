@@ -15,12 +15,12 @@ public class BankController {
     private BankService bankService;
 
     @GetMapping
-    public List<BankDTO> getBonus(){
+    public List<BankDTO> getBank(){
         return  bankService.getBanks();
     }
 
     @PostMapping
-    public  BankDTO saveBonus(@RequestBody  BankDTO bankDTO){
+    public  BankDTO saveBank(@RequestBody  BankDTO bankDTO){
         return bankService.saveBank(bankDTO);
     }
     @PutMapping//update
@@ -29,9 +29,9 @@ public class BankController {
     }
 
     @DeleteMapping
-    public boolean deleteBank(@RequestBody BankDTO bankDTO) {
+    public void deleteBank(@RequestBody BankDTO bankDTO) {
 
-        return bankService.deleteBank(bankDTO);
+         bankService.deleteBank(bankDTO);
     }
     @GetMapping("/{id}")
     public BankDTO showBank(@PathVariable Long id) {

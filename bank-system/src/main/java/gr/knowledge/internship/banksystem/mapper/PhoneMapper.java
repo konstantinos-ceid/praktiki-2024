@@ -17,11 +17,11 @@ public class PhoneMapper {
     @Autowired
     private BankMapper bankMapper;
 
-    public List<Phone> toEntity(List<PhoneDTO> phoneDTOs){
+    public List<Phone> toEntityList(List<PhoneDTO> phoneDTOs){
        return  modelMapper.map(phoneDTOs,new TypeToken<List<Phone>>(){}.getType());
     }
 
-    public List<PhoneDTO> toDTO(List<Phone> phones){
+    public List<PhoneDTO> toDTOList(List<Phone> phones){
         return  modelMapper.map(phones,new TypeToken<List<PhoneDTO>>(){}.getType());
     }
 

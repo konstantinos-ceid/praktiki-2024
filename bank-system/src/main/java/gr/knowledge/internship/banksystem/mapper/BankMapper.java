@@ -14,11 +14,11 @@ public class BankMapper {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Bank> toEntity(List<BankDTO> bankDTOs){
+    public List<Bank> toEntityList(List<BankDTO> bankDTOs){
         return  modelMapper.map(bankDTOs,new TypeToken<List<Bank>>(){}.getType());
     }
 
-    public List<BankDTO> toDTO(List<Bank> banks){
+    public List<BankDTO> toDTOList(List<Bank> banks){
         return  modelMapper.map(banks,new TypeToken<List<BankDTO>>(){}.getType());
     }
 

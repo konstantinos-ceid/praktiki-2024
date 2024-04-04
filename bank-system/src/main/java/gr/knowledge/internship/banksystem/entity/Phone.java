@@ -19,10 +19,12 @@ public class Phone {
     @SequenceGenerator(name = "phone_id_seq", sequenceName = "phone_id_seq", allocationSize = 50, initialValue = 1)
     @NotNull
     private Long id;
-
+// foreign key
     @NotNull
     @Column(name="phone_type")
-    private Integer phoneType;
+    @ManyToOne
+    @JoinColumn(name = "phone_type", referencedColumnName = "id")
+    private CodedType phoneType;
 
     @NotNull
     @Size(max=10)
