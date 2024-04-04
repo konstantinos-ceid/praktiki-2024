@@ -1,6 +1,6 @@
 package gr.knowledge.internship.banksystem.mapper;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -24,7 +24,7 @@ public class DocumentMapper {
 	}
 
 	public List<Document> toEntityList(List<DocumentDTO> documentDTOList) {
-		List<Document> documentList = Collections.emptyList();
+		List<Document> documentList = new ArrayList<Document>();
 		for (DocumentDTO documentDTO : documentDTOList) {
 			Document documentToAdd = modelMapper.map(documentDTO, Document.class);
 			documentList.add(documentToAdd);
@@ -33,7 +33,7 @@ public class DocumentMapper {
 	}
 
 	public List<DocumentDTO> toDTOList(List<Document> documentList) {
-		List<DocumentDTO> documentDTOList = Collections.emptyList();
+		List<DocumentDTO> documentDTOList = new ArrayList<DocumentDTO>();
 		for (Document document : documentList) {
 			DocumentDTO documentDTOToAdd = modelMapper.map(document, DocumentDTO.class);
 			documentDTOList.add(documentDTOToAdd);

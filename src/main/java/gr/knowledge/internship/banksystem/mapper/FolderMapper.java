@@ -1,6 +1,6 @@
 package gr.knowledge.internship.banksystem.mapper;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -24,7 +24,7 @@ public class FolderMapper {
 	}
 
 	public List<Folder> toEntityList(List<FolderDTO> folderDTOList) {
-		List<Folder> folderList = Collections.emptyList();
+		List<Folder> folderList = new ArrayList<Folder>();
 		for (FolderDTO folderDTO : folderDTOList) {
 			Folder folderToAdd = modelMapper.map(folderDTO, Folder.class);
 			folderList.add(folderToAdd);
@@ -33,7 +33,7 @@ public class FolderMapper {
 	}
 
 	public List<FolderDTO> toDTOList(List<Folder> folderList) {
-		List<FolderDTO> folderDTOList = Collections.emptyList();
+		List<FolderDTO> folderDTOList = new ArrayList<FolderDTO>();
 		for (Folder folder : folderList) {
 			FolderDTO folderDTOToAdd = modelMapper.map(folder, FolderDTO.class);
 			folderDTOList.add(folderDTOToAdd);
