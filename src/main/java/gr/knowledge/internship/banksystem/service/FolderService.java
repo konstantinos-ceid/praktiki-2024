@@ -23,24 +23,24 @@ public class FolderService {
 	@Transactional(readOnly = true)
 	public FolderDTO getFolderById(Long id) {
 		Folder folder = folderRepository.getReferenceById(id);
-		return folderMapper.toFolderDTO(folder);
+		return folderMapper.toDTO(folder);
 	}
 
 	@Transactional(readOnly = true)
 	public List<FolderDTO> getAllFolders() {
 		List<Folder> allFolders = folderRepository.findAll();
-		return folderMapper.toFolderDTOList(allFolders);
+		return folderMapper.toDTOList(allFolders);
 	}
 
 	public FolderDTO saveFolder(FolderDTO folderDTO) {
-		Folder folderToSave = folderMapper.toFolder(folderDTO);
+		Folder folderToSave = folderMapper.toEntity(folderDTO);
 		folderRepository.save(folderToSave);
-		return folderMapper.toFolderDTO(folderToSave);
+		return folderMapper.toDTO(folderToSave);
 	}
 
 	public FolderDTO updateFolder(FolderDTO folderDTO) {
 		if(this.existsInDatabase(folderDTO)) {
-			Folder folderToSave = folderMapper.toFolder(folderDTO);
+			Folder folderToSave = folderMapper.toEntity(folderDTO);
 			folderRepository.save(folderToSave);
 		}
 		return folderDTO;
@@ -48,7 +48,7 @@ public class FolderService {
 
 
 	public void deleteFolder(FolderDTO folderDTO) {
-		Folder folderToDelete = folderMapper.toFolder(folderDTO);
+		Folder folderToDelete = folderMapper.toEntity(folderDTO);
 		folderRepository.delete(folderToDelete);
 	}
 

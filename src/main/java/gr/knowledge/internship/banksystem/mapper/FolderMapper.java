@@ -15,15 +15,15 @@ public class FolderMapper {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public Folder toFolder(FolderDTO folderDTO) {
+	public Folder toEntity(FolderDTO folderDTO) {
 		return modelMapper.map(folderDTO, Folder.class);
 	}
 
-	public FolderDTO toFolderDTO(Folder folder) {
+	public FolderDTO toDTO(Folder folder) {
 		return modelMapper.map(folder, FolderDTO.class);
 	}
 
-	public List<Folder> toFolderList(List<FolderDTO> folderDTOList) {
+	public List<Folder> toEntityList(List<FolderDTO> folderDTOList) {
 		List<Folder> folderList = Collections.emptyList();
 		for (FolderDTO folderDTO : folderDTOList) {
 			Folder folderToAdd = modelMapper.map(folderDTO, Folder.class);
@@ -32,7 +32,7 @@ public class FolderMapper {
 		return folderList;
 	}
 
-	public List<FolderDTO> toFolderDTOList(List<Folder> folderList) {
+	public List<FolderDTO> toDTOList(List<Folder> folderList) {
 		List<FolderDTO> folderDTOList = Collections.emptyList();
 		for (Folder folder : folderList) {
 			FolderDTO folderDTOToAdd = modelMapper.map(folder, FolderDTO.class);

@@ -15,15 +15,15 @@ public class DocumentMapper {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public Document toDocument(DocumentDTO documentDTO) {
+	public Document toEntity(DocumentDTO documentDTO) {
 		return modelMapper.map(documentDTO, Document.class);
 	}
 
-	public DocumentDTO toDocumentDTO(Document document) {
+	public DocumentDTO toDTO(Document document) {
 		return modelMapper.map(document, DocumentDTO.class);
 	}
 
-	public List<Document> toDocumentList(List<DocumentDTO> documentDTOList) {
+	public List<Document> toEntityList(List<DocumentDTO> documentDTOList) {
 		List<Document> documentList = Collections.emptyList();
 		for (DocumentDTO documentDTO : documentDTOList) {
 			Document documentToAdd = modelMapper.map(documentDTO, Document.class);
@@ -32,7 +32,7 @@ public class DocumentMapper {
 		return documentList;
 	}
 
-	public List<DocumentDTO> toDocumentDTOList(List<Document> documentList) {
+	public List<DocumentDTO> toDTOList(List<Document> documentList) {
 		List<DocumentDTO> documentDTOList = Collections.emptyList();
 		for (Document document : documentList) {
 			DocumentDTO documentDTOToAdd = modelMapper.map(document, DocumentDTO.class);

@@ -24,24 +24,24 @@ public class DocumentService {
 	@Transactional(readOnly = true)
 	public DocumentDTO getDocumentById(Long id) {
 		Document document = documentRepository.getReferenceById(id);
-		return documentMapper.toDocumentDTO(document);
+		return documentMapper.toDTO(document);
 	}
 
 	@Transactional(readOnly = true)
 	public List<DocumentDTO> getAllDocuments() {
 		List<Document> allDocument = documentRepository.findAll();
-		return documentMapper.toDocumentDTOList(allDocument);
+		return documentMapper.toDTOList(allDocument);
 	}
 
 	public DocumentDTO saveDocument(DocumentDTO documentDTO) {
-		Document documentToSave = documentMapper.toDocument(documentDTO);
+		Document documentToSave = documentMapper.toEntity(documentDTO);
 		documentRepository.save(documentToSave);
-		return documentMapper.toDocumentDTO(documentToSave);
+		return documentMapper.toDTO(documentToSave);
 	}
 
 	public DocumentDTO updateDocument(DocumentDTO documentDTO) {
 		if (this.existsInDatabase(documentDTO)) {
-			Document documentToSave = documentMapper.toDocument(documentDTO);
+			Document documentToSave = documentMapper.toEntity(documentDTO);
 			documentRepository.save(documentToSave);
 		}
 		return documentDTO;
@@ -49,7 +49,7 @@ public class DocumentService {
 
 
 	public void deleteDocument(DocumentDTO documentDTO) {
-		Document documentToDelete = documentMapper.toDocument(documentDTO);
+		Document documentToDelete = documentMapper.toEntity(documentDTO);
 		documentRepository.delete(documentToDelete);
 	}
 
