@@ -58,6 +58,7 @@ public class Applicant implements Serializable {
     private String iban;
 
     @JoinColumn(name = "folder_id")
+    @ManyToOne
     @NotNull
     private Folder folder;
 
