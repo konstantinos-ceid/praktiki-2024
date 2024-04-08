@@ -41,7 +41,7 @@ public class ApplicantDTO implements Serializable {
                 ", afm='" + afm + '\'' +
                 ", amka='" + amka + '\'' +
                 ", iban='" + iban + '\'' +
-                ", folderId=" + folderId +
+                ", folder=" + folder +
                 '}';
     }
 }

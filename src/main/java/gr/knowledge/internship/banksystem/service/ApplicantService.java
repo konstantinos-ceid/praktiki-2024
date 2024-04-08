@@ -1,6 +1,6 @@
 package gr.knowledge.internship.banksystem.service;
 
-import gr.knowledge.internship.banksystem.Dto.ApplicantDTO;
+import gr.knowledge.internship.banksystem.dto.ApplicantDTO;
 import gr.knowledge.internship.banksystem.entity.Applicant;
 import gr.knowledge.internship.banksystem.mapper.ApplicantMapper;
 import gr.knowledge.internship.banksystem.repository.ApplicantRepository;
@@ -63,7 +63,7 @@ public class ApplicantService {
      */
     public ApplicantDTO createApplicant(ApplicantDTO applicantDTO){
         Applicant applicant =  applicantMapper.toEntity(applicantDTO);
-        log.info("Applicant object created: " + applicant);
+        log.info("Applicant object created: {}", applicant);
         applicantRepository.save(applicant);
         return applicantDTO;
     }

@@ -76,7 +76,7 @@ return "Applicant{" +
                 ", afm='" + afm + '\'' +
                 ", amka='" + amka + '\'' +
                 ", iban='" + iban + '\'' +
-                ", folder_id=" + folderId +
+                ", folderx=" + folder +
                 '}';
     }
 }

@@ -1,6 +1,6 @@
 package gr.knowledge.internship.banksystem.mapper;
 
-import gr.knowledge.internship.banksystem.Dto.ApplicantDTO;
+import gr.knowledge.internship.banksystem.dto.ApplicantDTO;
 import gr.knowledge.internship.banksystem.entity.Applicant;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
