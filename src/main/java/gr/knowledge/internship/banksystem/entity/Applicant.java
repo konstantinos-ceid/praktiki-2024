@@ -68,16 +68,16 @@ return "Applicant{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", fathers_name='" + fathersName + '\'' +
-                ", fathers_surname='" + fathersSurname + '\'' +
-                ", mothers_name='" + mothersName + '\'' +
-                ", mothers_surname='" + mothersSurname + '\'' +
-                ", date_of_birth=" + dateOfBirth +
-                ", place_of_birth='" + placeOfBirth + '\'' +
+                ", fathersName='" + fathersName + '\'' +
+                ", fathersSurname='" + fathersSurname + '\'' +
+                ", mothersName='" + mothersName + '\'' +
+                ", mothersSurname='" + mothersSurname + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", placeOfBirth='" + placeOfBirth + '\'' +
                 ", afm='" + afm + '\'' +
                 ", amka='" + amka + '\'' +
                 ", iban='" + iban + '\'' +
-                ", folderx=" + folder +
+                ", folder=" + folder +
                 '}';
     }
 }
