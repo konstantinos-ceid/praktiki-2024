@@ -1,6 +1,6 @@
 package gr.knowledge.internship.banksystem.controller;
 
-import gr.knowledge.internship.banksystem.dto.CodedTypeDto;
+import gr.knowledge.internship.banksystem.dto.CodedTypeDTO;
 import gr.knowledge.internship.banksystem.service.CodedTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,27 +17,27 @@ public class CodedTypeController {
     private CodedTypeService codedTypeService;
 
     @GetMapping
-    public List<CodedTypeDto> getAllCodedTypes() {
+    public List<CodedTypeDTO> getAllCodedTypes() {
         return codedTypeService.getAllCodedTypes();
     }
 
     @GetMapping("/{id}")
-    public CodedTypeDto getCodedTypeById(@PathVariable Long id) {
+    public CodedTypeDTO getCodedTypeById(@PathVariable Long id) {
         return codedTypeService.getCodedTypeById(id);
     }
 
     @PostMapping
-    public CodedTypeDto createCodedType(@RequestBody CodedTypeDto codedTypeDto) {
+    public CodedTypeDTO createCodedType(@RequestBody CodedTypeDTO codedTypeDto) {
         return codedTypeService.saveCodedType(codedTypeDto);
     }
 
     @PutMapping("/{id}")
-    public CodedTypeDto updateCodedType(@RequestBody CodedTypeDto codedTypeDto, @PathVariable Long id) {
+    public CodedTypeDTO updateCodedType(@RequestBody CodedTypeDTO codedTypeDto, @PathVariable Long id) {
         return codedTypeService.updateCodedType(codedTypeDto, id);
     }
 
     @DeleteMapping
-    public void deleteCodedType(@RequestBody CodedTypeDto codedTypeDto) {
+    public void deleteCodedType(@RequestBody CodedTypeDTO codedTypeDto) {
         codedTypeService.deleteCodedType(codedTypeDto);
     }
 
