@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,7 +20,7 @@ public class ApplicantDTO implements Serializable {
     private String fathersSurname;
     private String mothersName;
     private String mothersSurname;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String placeOfBirth;
     private String afm;
     private String amka;
