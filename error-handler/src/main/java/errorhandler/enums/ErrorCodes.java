@@ -30,8 +30,6 @@ public class ErrorCodes {
 
     private String generateCode() {
         counter++;
-        String generatedCode = "PR-" + String.format("%03d", counter);
-        System.out.println("Generated code: " + generatedCode);
-        return generatedCode;
+        return "PR-" + String.format("%03d", counter);
     }
 }
