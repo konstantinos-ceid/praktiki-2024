@@ -1,6 +1,7 @@
 package gr.knowledge.internship.banksystem.service;
 
 import gr.knowledge.internship.banksystem.dto.BankDTO;
+import gr.knowledge.internship.banksystem.dto.PhoneDTO;
 import gr.knowledge.internship.banksystem.mapper.BankMapper;
 import gr.knowledge.internship.banksystem.repository.BankRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -43,13 +44,32 @@ public class BankService {
         return bankMapper.toDTO(bankRepository.save(bankMapper.toEntity(bankDTO)));
     }
     /**
-     * Updates an existing bank.
+     * Updates the bank details with the given ID using the provided bank DTO.
+     * Validates the bank DTO against the provided ID before updating.
      *
-     * @param bankDTO the bank DTO to be updated
-     * @return the updated bank DTO
+     * @param bankDTO The bank DTO containing the updated bank details.
+     * @param id      The ID of the bank to be updated.
+     * @return The updated bank DTO.
+     * @throws IllegalArgumentException if the bank with the given ID does not exist or if the ID in the path does not match the ID in the DTO.
      */
-    public BankDTO updateBank(BankDTO bankDTO){
+    public BankDTO updateBank(BankDTO bankDTO,Long id){
+        validateBank(bankDTO,id);
         return bankMapper.toDTO(bankRepository.save(bankMapper.toEntity(bankDTO)));
+    }
+    /**
+     * Validates the given bank DTO against the provided ID.
+     *
+     * @param bankDTO The bank DTO to be validated.
+     * @param id      The ID against which the bank DTO is validated.
+     * @throws IllegalArgumentException if the bank with the given ID does not exist or if the ID in the path does not match the ID in the DTO.
+     */
+    private void validateBank(BankDTO bankDTO, Long id){
+        if(bankRepository.existsById(bankDTO.getId())){
+            throw new IllegalArgumentException("There is no bank with id"+ bankDTO.getId());
+        }
+        else if(!bankDTO.getId().equals(id)){
+            throw new IllegalArgumentException("ID in Path doesn't match body");
+        }
     }
     /**
      * Deletes a bank.

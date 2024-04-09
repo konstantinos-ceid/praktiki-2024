@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 @Transactional
 @Log4j2
-public class BankRegistryService {
+public class  BankRegistryService {
 
     @Autowired
     private BankRegistryRepository bankRegistryRepository;

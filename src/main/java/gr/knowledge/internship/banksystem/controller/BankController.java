@@ -22,9 +22,9 @@ public class BankController {
     public  BankDTO saveBank(@RequestBody  BankDTO bankDTO){
         return bankService.saveBank(bankDTO);
     }
-    @PutMapping//update
-    public BankDTO updateBank(@RequestBody BankDTO bankDTO) {
-        return bankService.updateBank(bankDTO);
+    @PutMapping("/{id}")
+    public BankDTO updateBank(@RequestBody BankDTO bankDTO,@PathVariable Long id) {
+        return bankService.updateBank(bankDTO,id);
     }
 
     @DeleteMapping
