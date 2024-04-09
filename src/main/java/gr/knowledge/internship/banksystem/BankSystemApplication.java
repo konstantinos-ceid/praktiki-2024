@@ -15,5 +15,4 @@ public class BankSystemApplication {
     public ModelMapper modelMapper(){
         return new ModelMapper();
     }
-
 }
