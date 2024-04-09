@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class TestController {
 
-   /* @GetMapping("/users/{id}")
+    //test for EntityNotFoundException
+    @GetMapping("/users/{id}")
     public ResponseEntity<Object> getUser(@PathVariable Long id) {
         // Simulate retrieving a user by ID
         if (id == 1L) {
@@ -27,20 +28,22 @@ public class TestController {
             ErrorCodes errorCode = new ErrorCodes();
             EntityNotFoundException exception = new EntityNotFoundException("User not found with id " + id);
             ErrorDTO errorDTO = new ErrorDTO(errorCode, exception);
-            HttpStatus httpStatus = HttpStatus.valueOf(errorCode.getStatus());
+            HttpStatus httpStatus = HttpStatus.valueOf(errorCode.getStatus().getCode());
             return ResponseEntity.status(httpStatus).body(errorDTO);
         }
-    }*/
+    }
 
-    @GetMapping("/users/{id}")
+    //test for IDExistsException
+   /* @GetMapping("/users/{id}")
     public ResponseEntity<Object> getUser(@PathVariable Long id) {
-        //simulate checking if the user ID already exists
+        // Simulate checking if the user ID already exists
         boolean userExists = checkIfUserExists(id);
         if (userExists) {
-            //if the user ID already exists, throw an IDExistsException
-            throw new IDExistsException("User with ID " + id + " already exists");
+            // If the user ID already exists, return a message indicating that the user already exists
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("User with ID " + id + " already exists");
         } else {
-            //if the user ID doesn't exist, return a message indicating that the user doesn't exist
+            // If the user ID doesn't exist, return a message indicating that the user doesn't exist
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("User with ID " + id + " does not exist");
         }
@@ -48,7 +51,7 @@ public class TestController {
 
     private boolean checkIfUserExists(Long id) {
         return id == 1L; // Assuming user with ID 1 exists
-    }
+    }*/
 
 }
 

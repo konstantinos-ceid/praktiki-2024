@@ -28,13 +28,25 @@ public class ExceptionsHandler {
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    /**
+     * Handles EntityNotFoundException and returns a ResponseEntity with status code NOT_FOUND.
+     * @param ex The EntityNotFoundException that occurred.
+     * @return A ResponseEntity with status code NOT_FOUND.
+     */
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        ErrorCodes errorCodes = new ErrorCodes(ErrorCodes.StatusCode.STATUS_NOT_FOUND);
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.valueOf(errorCodes.getStatus().getCode()));
     }
 
+    /**
+     * Handles IDExistsException and returns a ResponseEntity with status code CONFLICT.
+     * @param ex The IDExistsException that occurred.
+     * @return A ResponseEntity with status code CONFLICT.
+     */
     @ExceptionHandler(IDExistsException.class)
     public ResponseEntity<Object> handleIDAlreadyExistsException(IDExistsException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+        ErrorCodes errorCodes = new ErrorCodes(ErrorCodes.StatusCode.STATUS_CONFLICT);
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.valueOf(errorCodes.getStatus().getCode()));
     }
 }

@@ -6,30 +6,36 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ErrorCodes {
-    private static Integer counter = 0; //incremented globally with static
+    private static Integer counter = 0; // Incremented globally with static
     private String code;
-    private Integer status;
-
-    public static int STATUS_NOT_FOUND = 404;
-    public static int STATUS_OK = 200;
-    public static int STATUS_INTERNAL_SERVER_ERROR = 500;
+    private StatusCode status;
 
     public ErrorCodes() {
         this.code = generateCode();
-        this.status = STATUS_INTERNAL_SERVER_ERROR; // Default status code
+        this.status = StatusCode.STATUS_INTERNAL_SERVER_ERROR; // Default status code
     }
 
-    public ErrorCodes(int status) {
+    public ErrorCodes(StatusCode status) {
         this.code = generateCode();
-        if (status == STATUS_NOT_FOUND || status == STATUS_OK || status == STATUS_INTERNAL_SERVER_ERROR) {
-            this.status = status;
-        } else {
-            throw new IllegalArgumentException("Invalid status code");
-        }
+        this.status = status;
     }
 
     private String generateCode() {
         counter++;
         return "PR-" + String.format("%03d", counter);
+    }
+
+    @Getter
+    public enum StatusCode {
+        STATUS_NOT_FOUND(404),
+        STATUS_OK(200),
+        STATUS_INTERNAL_SERVER_ERROR(500),
+        STATUS_CONFLICT(409);
+
+        private final int code;
+
+        StatusCode(int code) {
+            this.code = code;
+        }
     }
 }
