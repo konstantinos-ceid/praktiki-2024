@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -14,7 +16,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-public class LoanInstallment {
+@Table(name = "loan_installment")
+public class LoanInstallment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "loan_installment_id_seq")
@@ -31,16 +34,16 @@ public class LoanInstallment {
     private LocalDate startDate;
 
     @Column(name="intrest_amount")
-    private float interestAmount;
+    private BigDecimal interestAmount;
 
     @Column(name="capital_amount")
-    private float capitalAmount;
+    private BigDecimal capitalAmount;
 
     @Column(name="balance_of_interest_amount")
-    private float balanceOfInterestAmount;
+    private BigDecimal balanceOfInterestAmount;
 
     @Column(name="balance_of_capital_amount")
-    private float balanceOfCapitalAmount;
+    private BigDecimal balanceOfCapitalAmount;
 
 
 

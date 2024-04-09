@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -18,8 +19,8 @@ public class LoanInstallmentDTO implements Serializable {
     private Long id;
     private Loan loan;
     private LocalDate startDate;
-    private float interestAmount;
-    private float capitalAmount;
-    private float balanceOfInterestAmount;
-    private float balanceOfCapitalAmount;
+    private BigDecimal interestAmount;
+    private BigDecimal capitalAmount;
+    private BigDecimal balanceOfInterestAmount;
+    private BigDecimal balanceOfCapitalAmount;
 }

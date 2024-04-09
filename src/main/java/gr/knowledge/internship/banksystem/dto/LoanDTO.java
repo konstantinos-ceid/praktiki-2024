@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -17,10 +18,10 @@ public class LoanDTO implements Serializable {
     private Long id;
     private CodedTypeDTO loanType;
     private ApplicantDTO applicantDTO;
-    private BankRegistry bankRegistry;
-    private int months;
-    private float amount;
-    private float interestRate;
-    private float nominalAmount;
+    private BankRegistryDTO bankRegistryDTO;
+    private Integer months;
+    private BigDecimal amount;
+    private BigDecimal interestRate;
+    private BigDecimal nominalAmount;
     private CodedTypeDTO loanStatus;
 }

@@ -16,7 +16,6 @@ public class LoanController {
     @Autowired
     private  LoanService loanService;
 
-
     @PostMapping
     public LoanDTO createLoan(@RequestBody LoanDTO loanDTO) {
         return loanService.saveLoan(loanDTO);
@@ -33,9 +32,7 @@ public class LoanController {
     }
 
     @PutMapping("/{id}")
-    public LoanDTO updateLoan(@PathVariable Long id, @RequestBody LoanDTO loanDTO) {
-        return loanService.updateLoan(loanDTO, id);
-    }
+    public LoanDTO updateLoan(@PathVariable Long id, @RequestBody LoanDTO loanDTO) { return loanService.updateLoan(loanDTO, id); }
 
     @DeleteMapping
     public void deleteLoan(@RequestBody LoanDTO loanDTO) {

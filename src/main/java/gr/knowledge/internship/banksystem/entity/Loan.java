@@ -7,12 +7,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Loan {
+@Table(name = "loan")
+public class Loan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "loan_id_seq")
     @SequenceGenerator(name = "loan_id_seq", sequenceName = "loan_id_seq", allocationSize = 50, initialValue = 1)
@@ -25,7 +29,7 @@ public class Loan {
     private CodedType loanType;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="applicant_id")
     private Applicant applicant;
 
@@ -35,16 +39,16 @@ public class Loan {
     private BankRegistry bankRegistry;
 
     @Column(name="months")
-    private int months;
+    private Integer months;
 
     @Column(name="amount")
-    private float amount;
+    private BigDecimal amount;
 
     @Column(name="interest_rate")
-    private float interestRate;
+    private BigDecimal interestRate;
 
     @Column(name="nominal_amount")
-    private float nominalAmount;
+    private BigDecimal nominalAmount;
 
     @ManyToOne
     @NotNull
