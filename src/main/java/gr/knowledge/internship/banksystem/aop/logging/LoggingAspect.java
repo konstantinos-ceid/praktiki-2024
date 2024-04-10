@@ -18,12 +18,12 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class LoggingAspect {
 
-	@Pointcut("within(gr.knowledge.internship.banksystem.service..*)")
-	public void servicePointcut() {
+	@Pointcut("execution(* gr.knowledge.internship.banksystem.service.*.*(..))")
+	private void allServiceMethods() {
 	}
 
-	@Before(value = "servicePointcut()")
-	public void beforeServicePointcut(JoinPoint joinPoint) {
+	@Before(value = "allServiceMethods()")
+	private void beforeServiceMethod(JoinPoint joinPoint) {
 		CodeSignature codeSignature = (CodeSignature) joinPoint.getSignature();
 		String[] parameters = codeSignature.getParameterNames();
 		Map<String, String> arguments = new HashMap<String, String>();
@@ -34,9 +34,9 @@ public class LoggingAspect {
 		String joinClass = joinPoint.getSignature().getDeclaringType().getSimpleName();
 		log.debug("Entered " + joinMethod + " in " + joinClass + " with arguments " + arguments);
 	}
-	
-	@AfterReturning(value = "servicePointcut()", returning = "result")
-	public void afterServicePointcut(JoinPoint joinPoint, Object result) {
+
+	@AfterReturning(value = "allServiceMethods()", returning = "result")
+	private void afterServiceMethod(JoinPoint joinPoint, Object result) {
 		String joinMethod = joinPoint.getSignature().getName();
 		String joinClass = joinPoint.getSignature().getDeclaringType().getSimpleName();
 		log.debug("Exited " + joinMethod + " in " + joinClass + " with return statement " + result.toString());
