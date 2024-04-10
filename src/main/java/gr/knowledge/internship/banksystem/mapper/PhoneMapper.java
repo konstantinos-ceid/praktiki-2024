@@ -14,8 +14,10 @@ public class PhoneMapper {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired
-    private BankMapper bankMapper;
+
+ //This was not necessary
+   // @Autowired
+  //  private BankMapper bankMapper;
 
     public List<Phone> toEntityList(List<PhoneDTO> phoneDTOs){
        return  modelMapper.map(phoneDTOs,new TypeToken<List<Phone>>(){}.getType());

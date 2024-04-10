@@ -23,9 +23,9 @@ public class PhoneController {
     public PhoneDTO savePhone(@RequestBody  PhoneDTO phoneDTO){
         return phoneService.savePhone(phoneDTO);
     }
-    @PutMapping
-    public PhoneDTO updatePhone(@RequestBody PhoneDTO phoneDTO) {
-        return phoneService.updatePhone(phoneDTO);
+    @PutMapping("/{id}")
+    public PhoneDTO updatePhone(@RequestBody PhoneDTO phoneDTO,@PathVariable Long id) {
+        return phoneService.updatePhone(phoneDTO,id);
     }
     @DeleteMapping
     public void deletePhone(@RequestBody PhoneDTO phoneDTO) {phoneService.deletePhone(phoneDTO);}

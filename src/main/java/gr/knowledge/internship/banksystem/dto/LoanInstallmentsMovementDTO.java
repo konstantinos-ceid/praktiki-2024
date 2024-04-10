@@ -1,19 +1,17 @@
 package gr.knowledge.internship.banksystem.dto;
 
-import java.io.Serializable;
-
+import gr.knowledge.internship.banksystem.entity.Loan;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-@NoArgsConstructor
 @Getter
 @Setter
-public class CodedTypeDTO implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+public class LoanInstallmentsMovementDTO {
     private Long id;
-    private String code;
-    private String description;
-    private CodedTypeDTO codedType;
+    private MovementDTO movement;
+     private Loan loan;
 }

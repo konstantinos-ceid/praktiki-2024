@@ -1,6 +1,7 @@
 package gr.knowledge.internship.banksystem.service;
 
 import gr.knowledge.internship.banksystem.dto.PhoneDTO;
+import gr.knowledge.internship.banksystem.entity.Phone;
 import gr.knowledge.internship.banksystem.mapper.PhoneMapper;
 import gr.knowledge.internship.banksystem.repository.PhoneRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -44,15 +45,34 @@ public class PhoneService {
         return phoneMapper.toDTO(phoneRepository.save(phoneMapper.toEntity(phoneDTO)));
     }
     /**
-     * Updates an existing phone.
+     * Updates the phone details with the given ID using the provided phone DTO.
+     * Validates the phone DTO against the provided ID before updating.
      *
-     * @param phoneDTO the phone DTO to be updated
-     * @return the updated phone DTO
+     * @param phoneDTO The phone DTO containing the updated phone details.
+     * @param id       The ID of the phone to be updated.
+     * @return The updated phone DTO.
+     * @throws IllegalArgumentException if the phone with the given ID does not exist or if the ID in the path does not match the ID in the DTO.
      */
-    public PhoneDTO updatePhone(PhoneDTO phoneDTO){
+    public PhoneDTO updatePhone(PhoneDTO phoneDTO,Long id ){
+        validatePhone(phoneDTO,id);
         return phoneMapper.toDTO(phoneRepository.save(phoneMapper.toEntity(phoneDTO)));
     }
 
+    /**
+     * Validates the given phone DTO against the provided ID.
+     *
+     * @param phoneDTO The phone DTO to be validated.
+     * @param id       The ID against which the phone DTO is validated.
+     * @throws IllegalArgumentException if the phone with the given ID does not exist or if the ID in the path does not match the ID in the DTO.
+     */
+    private void validatePhone(PhoneDTO phoneDTO,Long id){
+        if(phoneRepository.existsById(phoneDTO.getId())){
+            throw new IllegalArgumentException("There is no Phone with id"+ phoneDTO.getId());
+        }
+        else if(!phoneDTO.getId().equals(id)){
+            throw new IllegalArgumentException("ID in Path doesn't match body");
+        }
+    }
     /**
      * Deletes a phone.
      *
