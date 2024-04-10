@@ -1,6 +1,7 @@
  package gr.knowledge.internship.banksystem.controller;
 
 import gr.knowledge.internship.banksystem.dto.LoanDTO;
+import gr.knowledge.internship.banksystem.entity.Loan;
 import gr.knowledge.internship.banksystem.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ public class LoanController {
     private  LoanService loanService;
 
     @PostMapping
-    public LoanDTO createLoan(@RequestBody LoanDTO loanDTO) {
+    public Loan createLoan(@RequestBody LoanDTO loanDTO) {
         return loanService.createLoan(loanDTO);
     }
 

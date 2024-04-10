@@ -17,8 +17,8 @@ public class LoanDTO implements Serializable {
 
     private Long id;
     private CodedTypeDTO loanType;
-    private ApplicantDTO applicantDTO;
-    private BankRegistryDTO bankRegistryDTO;
+    private ApplicantDTO applicant;
+    private BankRegistryDTO bankRegistry;
     private Integer months;
     private BigDecimal amount;
     private BigDecimal interestRate;

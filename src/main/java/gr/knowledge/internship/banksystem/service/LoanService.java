@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+
+
 /**
  * Service class for managing Loans.
  */
@@ -46,12 +48,14 @@ public class LoanService {
     }
     /**
      * Saves a new Loan to the repository.
-     * @param loanDto the LoanDto to save.
-     * @return the saved LoanDto.
+     * @param loanDto the Loan to save.
+     * @return the saved Loan.
      */
-    public LoanDTO createLoan(LoanDTO loanDto) {
-        loanInstallmentService.createLoanInstallments(loanRepository.save(loanMapper.toEntity(loanDto)));
-        return loanDto;
+    public Loan createLoan(LoanDTO loanDto) {
+        loanDto.setAmount(loanDto.getNominalAmount().add(loanDto.getNominalAmount().multiply(loanDto.getInterestRate())));
+        Loan loan = loanRepository.save(loanMapper.toEntity(loanDto));
+        loanInstallmentService.createLoanInstallments(loan);
+        return loan;
     }
     /**
      * Updates an existing Loan in the repository, if exists.

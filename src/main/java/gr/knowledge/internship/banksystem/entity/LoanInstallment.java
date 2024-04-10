@@ -33,7 +33,7 @@ public class LoanInstallment implements Serializable {
     @Column(name="start_date")
     private LocalDate startDate;
 
-    @Column(name="intrest_amount")
+    @Column(name="interest_amount")
     private BigDecimal interestAmount;
 
     @Column(name="capital_amount")

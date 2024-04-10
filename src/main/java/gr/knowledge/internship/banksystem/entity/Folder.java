@@ -29,6 +29,7 @@ public class Folder implements Serializable {
 	@SequenceGenerator(name = "folder_id_seq", sequenceName = "folder_id_seq")
 	@NotNull
 	private Long id;
+
 	@Size(max = 1024)
 	@Column(name = "description")
 	private String description;
