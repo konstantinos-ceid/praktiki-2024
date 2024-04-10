@@ -5,12 +5,14 @@ import java.util.Map;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.CodeSignature;
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.log4j.Log4j2;
 
 @Aspect
@@ -40,6 +42,11 @@ public class LoggingAspect {
 		String joinMethod = joinPoint.getSignature().getName();
 		String joinClass = joinPoint.getSignature().getDeclaringType().getSimpleName();
 		log.debug("Exited " + joinMethod + " in " + joinClass + " with return statement " + result.toString());
+	}
+
+	@AfterThrowing(pointcut = "execution(* gr.knowledge.internship.banksystem..* (..))", throwing = "ex")
+	private void afterEntityNotFoundException(EntityNotFoundException ex) {
+		log.error("EntityNotFoundException thrown: " + ex.getMessage());
 	}
 
 }
