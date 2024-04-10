@@ -133,11 +133,12 @@ public class LoanInstallmentService {
     public void createLoanInstallments(Loan loan) {
         BigDecimal totalMonthlyPayment = calculateMonthlyAnnuity(loan.getNominalAmount(), loan.getInterestRate(), loan.getMonths());
         for (int i = 1; i <= loan.getMonths(); i++) {
+            BigDecimal interestPart = calculateInterestPart(totalMonthlyPayment, loan.getInterestRate());
+            BigDecimal capitalPart = calculateCapitalPart(totalMonthlyPayment, interestPart);
+
             LoanInstallmentDTO loanInstallmentDto = new LoanInstallmentDTO();
             loanInstallmentDto.setLoan(loan);
             loanInstallmentDto.setStartDate(LocalDate.now().plusMonths(i));
-            BigDecimal interestPart = calculateInterestPart(totalMonthlyPayment, loan.getInterestRate());
-            BigDecimal capitalPart = calculateCapitalPart(totalMonthlyPayment, interestPart);
             loanInstallmentDto.setInterestAmount(interestPart);
             loanInstallmentDto.setCapitalAmount(capitalPart);
             loanInstallmentDto.setBalanceOfInterestAmount(interestPart);
