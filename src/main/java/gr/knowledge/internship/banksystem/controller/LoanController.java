@@ -18,7 +18,7 @@ public class LoanController {
 
     @PostMapping
     public LoanDTO createLoan(@RequestBody LoanDTO loanDTO) {
-        return loanService.saveLoan(loanDTO);
+        return loanService.createLoan(loanDTO);
     }
 
     @GetMapping

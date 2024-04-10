@@ -1,5 +1,7 @@
 package gr.knowledge.internship.banksystem.service;
 
+import gr.knowledge.internship.banksystem.dto.LoanDTO;
+import gr.knowledge.internship.banksystem.entity.Loan;
 import gr.knowledge.internship.banksystem.mapper.LoanInstallmentMapper;
 import gr.knowledge.internship.banksystem.dto.LoanInstallmentDTO;
 import gr.knowledge.internship.banksystem.entity.LoanInstallment;
@@ -9,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.List;
 /**
  * Service class for managing LoanInstallments.
@@ -86,5 +91,58 @@ public class LoanInstallmentService {
             throw new IllegalArgumentException("There is no LoanInstallment with ID: "+loanInstallmentDto.getId()+" to delete");
         }
         loanInstallmentRepository.delete(loanInstallmentMapper.toEntity(loanInstallmentDto));
+    }
+
+    /**
+     * Calculates the monthly annuity(Installment) payment for a loan. The formula used is: P = [r*PV] / [1 - (1 + r)^-n]
+     * @param loanAmount is the present value, or the total amount of the loan (PV)
+     * @param interestRate is the interest rate per period (monthly interest rate in this case) (r)
+     * @param totalMonths is the total number of payments (or periods) (n)
+     * @return the annuity payment (P)
+     */
+    private BigDecimal calculateMonthlyAnnuity(BigDecimal loanAmount, BigDecimal interestRate, int totalMonths) {
+
+        BigDecimal denominator = BigDecimal.ONE.subtract(BigDecimal.ONE.divide((BigDecimal.ONE.add(interestRate)).pow(totalMonths), 8, RoundingMode.HALF_UP));
+        return loanAmount.multiply(interestRate).divide(denominator, 2, RoundingMode.HALF_UP);
+    }
+
+    /**
+     * Calculates the interest part of the annuity payment for a specific period using the formula: Interest = Outstanding Loan Balance * Monthly Interest Rate
+     * @param annuityBalance The outstanding loan balance before the payment
+     * @param monthlyInterestRate The monthly interest rate
+     * @return The interest part of the annuity payment
+     */
+    private BigDecimal calculateInterestPart(BigDecimal annuityBalance, BigDecimal monthlyInterestRate) {
+        return annuityBalance.multiply(monthlyInterestRate);
+    }
+
+    /**
+     * Calculates the principal part of the annuity payment for a specific period using the formula: Principal = Total Monthly Payment - Interest
+     * @param totalMonthlyPayment The total monthly payment (annuity)
+     * @param interestPart The interest part of the payment
+     * @return The principal part of the annuity payment
+     */
+    private BigDecimal calculateCapitalPart(BigDecimal totalMonthlyPayment, BigDecimal interestPart) {
+        return totalMonthlyPayment.subtract(interestPart);
+    }
+
+    /**
+     * Creates loan installments for a given loan. Each installment includes the interest and principal parts of the annuity payment.
+     * @param loan The loan for which to create installments
+     */
+    public void createLoanInstallments(Loan loan) {
+        BigDecimal totalMonthlyPayment = calculateMonthlyAnnuity(loan.getNominalAmount(), loan.getInterestRate(), loan.getMonths());
+        for (int i = 1; i <= loan.getMonths(); i++) {
+            LoanInstallmentDTO loanInstallmentDto = new LoanInstallmentDTO();
+            loanInstallmentDto.setLoan(loan);
+            loanInstallmentDto.setStartDate(LocalDate.now().plusMonths(i));
+            BigDecimal interestPart = calculateInterestPart(totalMonthlyPayment, loan.getInterestRate());
+            BigDecimal capitalPart = calculateCapitalPart(totalMonthlyPayment, interestPart);
+            loanInstallmentDto.setInterestAmount(interestPart);
+            loanInstallmentDto.setCapitalAmount(capitalPart);
+            loanInstallmentDto.setBalanceOfInterestAmount(interestPart);
+            loanInstallmentDto.setBalanceOfCapitalAmount(capitalPart);
+            saveLoanInstallment(loanInstallmentDto);
+        }
     }
 }

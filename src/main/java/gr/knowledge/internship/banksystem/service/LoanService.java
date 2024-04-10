@@ -22,6 +22,9 @@ public class LoanService {
     @Autowired
     private LoanMapper loanMapper;
 
+    @Autowired
+    private LoanInstallmentService loanInstallmentService;
+
     /**
      * Retrieves all Loans from the repository and maps them to DTOs.
      * @return a list of LoanDto objects.
@@ -46,8 +49,8 @@ public class LoanService {
      * @param loanDto the LoanDto to save.
      * @return the saved LoanDto.
      */
-    public LoanDTO saveLoan(LoanDTO loanDto) {
-        loanRepository.save(loanMapper.toEntity(loanDto));
+    public LoanDTO createLoan(LoanDTO loanDto) {
+        loanInstallmentService.createLoanInstallments(loanRepository.save(loanMapper.toEntity(loanDto)));
         return loanDto;
     }
     /**
