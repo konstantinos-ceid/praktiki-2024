@@ -32,4 +32,8 @@ replay_pid*
 /.idea/workspace.xml
 /.idea/dataSources.xml
 /.idea/shelf/Uncommitted_changes_before_Update_at_4_8_2024_11_31_AM_[Changes]/shelved.patch
-/.idea/shelf/Uncommitted_changes_before_Update_at_4_8_2024_11_31_AM_[Changes]/shelved.patch
+/.classpath
+/.factorypath
+/.project
+/mvnw
+/mvnw.cmd
