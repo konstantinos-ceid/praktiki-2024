@@ -22,8 +22,8 @@ public class LoanInstallmentsMovement {
     @JoinColumn(name = "movement_id", referencedColumnName = "id")
     private Movement movement;
 
-   // @ManyToOne
- //   @JoinColumn(name = "loan_id", referencedColumnName = "id")
-  //  private Loan loan;
+   @ManyToOne
+    @JoinColumn(name = "loan_id", referencedColumnName = "id")
+    private Loan loan;
 
 }

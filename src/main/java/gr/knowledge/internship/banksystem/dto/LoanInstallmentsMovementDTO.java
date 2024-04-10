@@ -1,5 +1,6 @@
 package gr.knowledge.internship.banksystem.dto;
 
+import gr.knowledge.internship.banksystem.entity.Loan;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,5 +13,5 @@ import lombok.Setter;
 public class LoanInstallmentsMovementDTO {
     private Long id;
     private MovementDTO movement;
-    //  private Loan loan;
+     private Loan loan;
 }
