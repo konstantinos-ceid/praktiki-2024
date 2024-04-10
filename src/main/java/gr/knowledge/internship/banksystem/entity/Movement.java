@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -17,13 +18,14 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Movement {
+@Table(name="movement")
+public class Movement implements Serializable {
 
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_movement")
     @SequenceGenerator(name = "seq_movement", sequenceName = "seq_movement", allocationSize = 50, initialValue = 1)
-    private long id;
+    private Long id;
 
     @Column(name="numeric")
     private BigDecimal numeric;

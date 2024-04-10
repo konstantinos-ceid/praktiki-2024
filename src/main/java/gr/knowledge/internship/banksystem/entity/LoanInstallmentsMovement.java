@@ -7,12 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoanInstallmentsMovement {
+@Table(name="loan_installments_movement")
+public class LoanInstallmentsMovement implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_loan_installments_movement")
     @SequenceGenerator(name="seq_loan_installments_movement", sequenceName="seq_loan_installments_movement", allocationSize=50, initialValue = 1)
